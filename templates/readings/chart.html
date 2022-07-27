@@ -1,0 +1,295 @@
+
+{% load bootstrap4%}
+
+{%block chart%}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title> 
+        <link rel="stylesheet" type= "text/css" href="bootstrap-4.5.3-dist/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="{% static 'css/chart.css'%}">  
+        <!-- <script src="jquery-2.1.4.js"></script>
+        <script src="plotly.min.js"></script>
+        <script src="index.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+        
+        <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+        <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="manifest" href="manifest.json">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <!-- ios support -->
+      <link rel="apple-touch-icon" href="{% static 'Images/icons/icon-96x96.png'%}">
+      <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+    </head>
+    {% include 'Pages/header.html'%}
+    <body>
+        <div class="container">
+            <div class= "main">   
+                <div class= "row">
+                    <div class="col-md-4 mt-1">
+                        <div class="card text-center sidebar">
+                            <div class = "card">
+                               <img src= "{% static 'css/Images/logoo.png' %}" width = "100%" height="100%">
+                               <div class="mt-3">
+                                   <h3>{{profile.user.first_name}}</h3>
+                                   <a href="{% url 'profile' %}">Profile</a>
+                                   <a href="{% url 'home' %}">Signout</a>
+                               </div>
+                            </div>    
+                        </div>    
+                    </div> 
+                    <div class="col-md-8 mt-1">
+                        <div class="card mb-3 content">
+
+                                <p><b>Patient statistics</b></p>
+                                <hr>
+                                <!-- <div id="chart"></div>
+                                <div id="graph"></div> -->
+                                <p>Insulin</p>
+                                <div id="chartdiv"></div>																	
+                            </div>
+                        </div>
+                        
+                    </div>   
+                </div>    
+            </div>    
+        </div>
+        <div id="sideNav">                
+            <nav>
+              <ul>
+                <li><a href="#regform" >Login Form</a></li>
+                <li><a href="#footer" >Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!--the button layout -->
+          <div id="menuButton">            
+               <img src="{% static 'Images/menu.png'%}" id="menu">
+          </div>
+          {% include 'Pages/footer.html'%}
+     </body>
+     <style>
+        #chartdiv {
+          width: 100%;
+          height: 500px;
+        }
+        </style>
+        <!--the following is our scripts -->
+        <script>           
+            var menuButton= document.getElementById("menuButton")
+            var sideNav= document.getElementById("sideNav")
+            var menu = document.getElementById("menu")
+      
+            sideNav.style.right=="-250px";
+      
+            menuButton.onclick = function(){ 
+                 if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+                 menu.src="{% static 'Images/menu_inverse.png'%}"
+                }
+                 else{ sideNav.style.right="-250px";
+                 menu.src="{% static 'Images/menu.png' %}"
+                     } 
+            }  
+             var scroll = new SmoothScroll('a[href*="#"]', {
+                 speed: 1000,
+                 speedAsDuration: true
+        });
+        </script>
+        <script>
+            
+            am5.ready(function() {
+            
+            // Create root element
+            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+            var root = am5.Root.new("chartdiv");
+            
+            
+            // Set themes
+            // https://www.amcharts.com/docs/v5/concepts/themes/
+            root.setThemes([
+              am5themes_Animated.new(root)
+            ]);
+            
+            root.dateFormatter.setAll({
+                dateFormat: "yyyy",
+                dateFields: ["valueX"]
+            });
+            var data = [{
+                "time": "2012-07-30",
+                "value": 100
+              }, {
+                "time": "2012-07-31",
+                "value": 220
+              }, {
+                "time": "2012-08-01",
+                "value": 180
+              }, {
+                "time": "2012-08-02",
+                "value": 140
+              }, {
+                "time": "2012-08-03",
+                "value": 100
+              }, {
+                 "time": "2012-08-04",
+                "value": 110
+              }, {
+                 "time": "2012-08-05",
+                "value": 120
+              }, {
+                 "time": "2012-08-06",
+                "value": 200
+              }, {
+                 "time": "2012-08-07",
+                "value": 130
+              }, {
+                 "time": "2012-08-08",
+                "value": 140
+              }, {
+                 "time": "2012-08-09",
+                "value": 190
+              }, {
+                 "time": "2012-08-10",
+                "value": 100
+              }, {
+                 "time": "2012-08-11",
+                "value": 120
+              }, {
+                 "time": "2012-08-12",
+                "value": 160
+              }, {
+                 "time": "2012-08-13",
+                "value": 200
+              }, {
+                 "time": "2012-08-14",
+                "value": 150
+              }, {
+                 "time": "2012-08-15",
+                "value": 300
+              }, {
+                 "time": "2012-08-16",
+                "value": 100
+              }, {
+                 "time": "2012-08-17",
+                "value": 90
+              }, {
+                 "time": "2012-08-18",
+                "value": 70
+              }, {
+                 "time": "2012-08-19",
+                "value": 110
+              }, {
+                 "time": "2012-08-20",
+                "value": 140
+              }];
+// Create chart
+// https://www.amcharts.com/docs/v5/charts/xy-chart/
+var chart = root.container.children.push(am5xy.XYChart.new(root, {
+    focusable: true,
+    panX: true,
+    panY: true,
+    wheelX: "panX",
+    wheelY: "zoomX",
+    pinchZoomX:true
+  }));
+  
+  var easing = am5.ease.linear;
+  
+  
+  // Create axes
+  // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+  var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+    maxDeviation: 0.1,
+    groupData: false,
+    baseInterval: {
+      timeUnit: "day",
+      count: 1
+    },
+    renderer: am5xy.AxisRendererX.new(root, {
+  
+    }),
+    tooltip: am5.Tooltip.new(root, {})
+  }));
+  
+  var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+    maxDeviation: 0.2,
+    renderer: am5xy.AxisRendererY.new(root, {})
+  }));
+  
+  
+  // Add series
+  // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+  var series = chart.series.push(am5xy.LineSeries.new(root, {
+    minBulletDistance: 10,
+    connect: false,
+    xAxis: xAxis,
+    yAxis: yAxis,
+    valueYField: "value",
+    valueXField: "time",
+    tooltip: am5.Tooltip.new(root, {
+      pointerOrientation: "horizontal",
+      labelText: "{valueY}"
+    })
+  }));
+  
+  series.fills.template.setAll({
+    fillOpacity: 0.2,
+    visible: true
+  });
+  
+  series.strokes.template.setAll({
+    strokeWidth: 2
+  });
+  
+  
+  // Set up data processor to parse string dates
+  // https://www.amcharts.com/docs/v5/concepts/data/#Pre_processing_data
+  series.data.processor = am5.DataProcessor.new(root, {
+    dateFormat: "yyyy-MM-dd-:T:HH:mm",
+    dateFields: ["time"]
+  });
+  
+  series.data.setAll(data);
+  
+  series.bullets.push(function() {
+    var circle = am5.Circle.new(root, {
+      radius: 4,
+      fill: root.interfaceColors.get("background"),
+      stroke: series.get("fill"),
+      strokeWidth: 2
+    })
+  
+    return am5.Bullet.new(root, {
+      sprite: circle
+    })
+  });
+  
+  
+  // Add cursor
+  // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+  var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+    xAxis: xAxis,
+    behavior: "none"
+  }));
+  cursor.lineY.set("visible", false);
+  
+  // add scrollbar
+  chart.set("scrollbarX", am5.Scrollbar.new(root, {
+    orientation: "horizontal"
+  }));
+  
+  
+  // Make stuff animate on load
+  // https://www.amcharts.com/docs/v5/concepts/animations/
+  chart.appear(1000, 100);
+  
+  }); // end am5.ready()
+  </script>
+  
+</html>
+{%endblock chart%}

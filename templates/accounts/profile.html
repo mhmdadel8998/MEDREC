@@ -1,0 +1,394 @@
+
+{% load bootstrap4%}
+
+{%block profile%}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title> 
+        <link rel="stylesheet" type= "text/css" href="bootstrap-4.5.3-dist/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    {% include 'Pages/header.html'%}
+    {% if profile.role == "patient"%}
+    <body>      
+        <div class="container">
+            <div class= "main">   
+                <div class= "row">
+                    <div class="col-md-4 mt-1">
+                        <div class="card text-center sidebar">
+                            <div class = "card">
+                                <img src= "{% static 'css/Images/logoo.png' %}" >
+                                  <div class="mt-3">
+                                   <h3> </h3>
+                                   <a href="{% url 'myrecords' %}">My Records</a>
+                                   <a href="{% url 'edit_profile' %}">Edit Profile</a>
+                                   <a href="{% url 'prediction' %}">Diabetes Check</a>
+                                   <a href="{% url 'chart' %}">My Statistics</a>
+                                   <a href="{% url 'home' %}">Signout</a>
+                               </div>
+                            </div>    
+                        </div>    
+                    </div> 
+                    
+                    <div class="col-md-8 mt-1">
+                        <div class="card mb-3 content">
+                            <h1 class="m-3 pt-3">Welcome  {{profile.user.first_name}}</h1>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p><b>Personal Data<b></p>
+                                        <hr width="150">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Full name<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{profile.user.first_name}} {{profile.user.last_name}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>SSN<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{profile.ssn}}
+                                    </div>
+                                </div>
+                                <hr>
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Email<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{profile.user.email}}
+
+                                       
+                                        
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Phone<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{profile.phone}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <span id="dots">...</span>
+                                <button onclick="myFunctionn()" id="myBtn">Read more</button>
+                                <span id="more">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>City<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{profile.city}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Address<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{profile.address}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Height<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{patient.height}}cm
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Weight<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{patient.weight}} kg
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Age<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{patient.age}}years old
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Diabetes type<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{patient.diatype}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Gender<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{profile.gender}}
+                                    </div>
+                                </div>
+                              </span> 
+                                <p><b>Brief Statistics</b></p>
+                                <div class="chart"><canvas id="myChart" style="width:100%;max-width:600px"></canvas></div>
+                                <div class="chart"><canvas id="myChart1" style="width:100%;max-width:600px"></canvas></div>
+                                <div class="chart"><canvas id="myChart2" style="width:100%;max-width:600px"></canvas></div>
+                            </div>
+                        </div>
+                    </div>   
+                </div>    
+            </div>    
+        </div>
+        <div id="sideNav">                
+            <nav>
+              <ul>
+                <li><a href="#regform" >Login Form</a></li>
+                <li><a href="#footer" >Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!--the button layout -->
+          <div id="menuButton">            
+               <img src="{%static 'Images/menu.png'%}" id="menu">
+          </div>
+
+          
+     </body>
+     
+        <!--the following is our scripts -->
+        <script>           
+            var menuButton= document.getElementById("menuButton")
+            var sideNav= document.getElementById("sideNav")
+            var menu = document.getElementById("menu")
+        
+            sideNav.style.right=="-250px";
+        
+            menuButton.onclick = function(){ 
+                 if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+                 menu.src="{% static 'Images/menu_inverse.png' %}"
+                }
+                 else{ sideNav.style.right="-250px";
+                 menu.src="{% static 'Images/menu.png' %}"
+                     } 
+            }  
+             var scroll = new SmoothScroll('a[href*="#"]', {
+                 speed: 1000,
+                 speedAsDuration: true
+        });
+          </script>
+        
+            {%include 'readings/readings.html'%}
+        <script>
+        function myFunctionn() {
+          var dots = document.getElementById("dots");
+          var moreText = document.getElementById("more");
+          var btnText = document.getElementById("myBtn");
+        
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+          }
+        }
+      </script>
+{%endif%}
+{% if profile.role == "doctor"%}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Profile</title> 
+            <link rel="stylesheet" type= "text/css" href="bootstrap-4.5.3-dist/css/bootstrap.min.css"> 
+            <link rel="stylesheet" href=" {% static 'css/doctorprofile.css' %}">  
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="manifest" href="manifest.json">
+            <!-- ios support -->
+          <link rel="apple-touch-icon" href="{% static 'Images/icons/icon-96x96.png' %}">
+          <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+        </head>
+        <body>
+       
+            <div class="container">
+                <div class= "main">   
+                    <div class= "row">
+                        <div class="col-md-4 mt-1">
+                          <div class="card text-center sidebar">
+                            <div class = "card">
+                                    <img src= "{% static 'css/Images/logoo.png' %}" >                                   <div class="mt-3">
+                                    {% comment %} <h3>{{profile.user.first_name}}</h3> {% endcomment %}
+                                    <a href="{% url 'edit_profile' %}">Edit Data</a>
+                                    {%if user.is_authenticated %}
+                                    <a href="{% url 'home' %}">Signout</a>
+                                    {% endif %}
+                                </div>    
+                            </div>    
+                        </div> 
+                        <div class="col-md-8 mt-1">
+                            <div class="card mb-3 content">
+                                <h1 class="m-3 pt-3">Welcome Dr.  {{profile.user.first_name}}</h1>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <p><b>Personal Data<b></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5><b>Full name<b></h5>
+                                        </div>
+                                        <div class="col-md-9 text-secondary">
+                                            {{profile.user.first_name}} {{profile.user.last_name}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5><b>SSN<b></h5>
+                                        </div>
+                                        <div class="col-md-9 text-secondary">
+                                            {{profile.ssn}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <span id="dots">...</span>
+                                    <button onclick="myFunctionn()" id="myBtn">Read more</button>
+                                    <span id="more">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5><b>Email<b></h5>
+                                        </div>
+                                        <div class="col-md-9 text-secondary">
+                                            {{profile.user.email}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5><b>Phone<b></h5>
+                                        </div>
+                                        <div class="col-md-9 text-secondary">
+                                            {{profile.phone}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5><b>City<b></h5>
+                                        </div>
+                                        <div class="col-md-9 text-secondary">
+                                            {{profile.city}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5><b>Address<b></h5>
+                                        </div>
+                                        <div class="col-md-9 text-secondary">
+                                            {{profile.address}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    </span>
+                                    <p>Search</p>
+                                    <form>
+                                    <div class="input-group rounded">
+                                        <input type="search" class="form-control rounded" name="dsearch" placeholder="Enter Username" aria-label="Search" />
+                                            {% csrf_token %}
+                                          <button class="input-group-text border-0" formaction="{% url 'patient_profile' %}" id="search-addon">
+                                          <i class="fas fa-search"></i>
+                                        </button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>   
+                    </div>    
+                </div>    
+            </div>
+            <div id="sideNav">                
+                <nav>
+                  <ul>
+                    <li><a href="#regform" >Login Form</a></li>
+                    <li><a href="#footer" >Contact Us</a></li>
+                  </ul>
+                </nav>
+              </div>
+    
+              <!--the button layout -->
+              <div id="menuButton">            
+                   <img src="{% static 'Images/menu.png' %}" id="menu">
+              </div>
+    
+              
+                
+         </body>
+    
+                 <!--the following is our scripts -->
+        <script>           
+            var menuButton= document.getElementById("menuButton")
+            var sideNav= document.getElementById("sideNav")
+            var menu = document.getElementById("menu")
+      
+            sideNav.style.right=="-250px";
+      
+            menuButton.onclick = function(){ 
+                 if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+                 menu.src="{%static 'Images/menu_inverse.png'%}"
+                }
+                 else{ sideNav.style.right="-250px";
+                 menu.src="{% static 'Images/menu.png' %}"
+                     } 
+            }  
+             var scroll = new SmoothScroll('a[href*="#"]', {
+                 speed: 1000,
+                 speedAsDuration: true
+        });
+          </script>
+    
+          <script>
+            function myFunctionn() {
+              var dots = document.getElementById("dots");
+              var moreText = document.getElementById("more");
+              var btnText = document.getElementById("myBtn");
+            
+              if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+              } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+              }
+            }
+          </script>
+    </html>
+    {% endif %}
+    {% include 'Pages/footer.html'%}
+{%endblock%}

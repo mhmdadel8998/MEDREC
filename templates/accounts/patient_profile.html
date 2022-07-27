@@ -1,0 +1,197 @@
+{% load static %}
+{% load bootstrap4%}
+{% include 'Pages/header.html'%}
+{%block profile%}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title> 
+        <script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+        <script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>     
+        <link rel="stylesheet" type= "text/css" href="bootstrap-4.5.3-dist/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+        <div class="container">
+            <div class= "main">   
+                <div class= "row">
+                    <div class="col-md-4 mt-1">
+                        <div class="card text-center sidebar">
+                            <div class = "card">
+                               <img src= "{% static 'css/Images/logoo.png' %}" >
+                               <div class="mt-3">
+                                   <h3>
+                                    {% comment %} {%for profile in profile%} {% endcomment %}
+                                    {{ profile.user.first_name}}
+                                    {% comment %} {%endfor%} {% endcomment %}
+                                </h3>
+                                    <a href="{% url 'myrecords' %}">Records</a>
+                                    <a href="{% url 'prediction' %}">Diabetes Check</a>
+                                    <a href="{% url 'chart' %}">Patient's Statistics</a>
+                                    <a href="{% url 'check' %}">Prescription Assist</a>
+                                    <a href="{% url 'profile' %}">Back To My Profile</a>                                   
+                               </div>
+                            </div>    
+                        </div>    
+                    </div> 
+                    
+                    <div class="col-md-8 mt-1">
+                        <div class="card mb-3 content">
+                            <h1 class="m-3 pt-3">Patient's Profile</h1>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p><b>Personal Data<b></p>
+                                        <hr width="150">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Full name<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {% comment %} {%for profile in profile%} {% endcomment %}
+                                        {{ profile.user.first_name}} {{profile.user.last_name}}
+                                        {% comment %} {%endfor%} {% endcomment %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>SSN<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {% comment %} {%for profile in profile%} {% endcomment %}
+                                        {{ profile.ssn}}
+                                        {% comment %} {%endfor%} {% endcomment %}
+                                    </div>
+                                </div>
+                                <hr>
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Email<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {% comment %} {%for profile in profile%} {% endcomment %}
+                                        {{ profile.user.email}}
+                                        {% comment %} {%endfor%} {% endcomment %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Phone<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {% comment %} {%for profile in profile%} {% endcomment %}
+                                        {{ profile.phone}}
+                                        {% comment %} {%endfor%} {% endcomment %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>City<b></h5>
+                                        </div>
+                                        <div class="col-md-9 text-secondary">
+                                            {% comment %} {%for profile in profile%} {% endcomment %}
+                                            {{ profile.city}}
+                                            {% comment %} {%endfor%} {% endcomment %}
+                                        </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Address<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {% comment %} {%for profile in profile%} {% endcomment %}
+                                        {{ profile.address}}
+                                        {% comment %} {%endfor%} {% endcomment %}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h5><b>Gender<b></h5>
+                                    </div>
+                                    <div class="col-md-9 text-secondary">
+                                        {{ profile.gender}}
+                                    </div>
+                                    <form enctype="multipart/form-data" >
+                                        {% csrf_token %}                                  
+                                    </form>
+                                </div>
+                                <hr>
+                                <hr>
+                                <p><b>Patient's statistics</b></p>
+                                <div class="chart"><canvas id="myChart" style="width:100%;max-width:600px"></canvas></div>
+                                <div class="chart"><canvas id="myChart1" style="width:100%;max-width:600px"></canvas></div>
+                                <div class="chart"><canvas id="myChart2" style="width:100%;max-width:600px"></canvas></div>
+                            </div>
+                        </div>
+                    </div>   
+                </div>    
+            </div>    
+        </div>
+        <div id="sideNav">                
+            <nav>
+              <ul>
+                <li><a href="#regform" >Login Form</a></li>
+                <li><a href="#footer" >Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!--the button layout -->
+          <div id="menuButton">            
+               <img src="{%static 'Images/menu.png'%}" id="menu">
+          </div>
+
+          
+     </body>
+     
+        <!--the following is our scripts -->
+        <script>           
+            var menuButton= document.getElementById("menuButton")
+            var sideNav= document.getElementById("sideNav")
+            var menu = document.getElementById("menu")
+        
+            sideNav.style.right=="-250px";
+        
+            menuButton.onclick = function(){ 
+                 if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+                 menu.src="{% static 'Images/menu_inverse.png' %}"
+                }
+                 else{ sideNav.style.right="-250px";
+                 menu.src="{% static 'Images/menu.png' %}"
+                     } 
+            }  
+             var scroll = new SmoothScroll('a[href*="#"]', {
+                 speed: 1000,
+                 speedAsDuration: true
+        });
+          </script>
+        
+            {%include 'readings/readings.html'%}
+        <script>
+        function myFunctionn() {
+          var dots = document.getElementById("dots");
+          var moreText = document.getElementById("more");
+          var btnText = document.getElementById("myBtn");
+        
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+          }
+        }
+      </script>
+      {% include 'Pages/footer.html'%}
+{%endblock profile%}

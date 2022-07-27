@@ -1,0 +1,20 @@
+{%block header%}
+{% load static %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'header.css' %}">  
+<link rel="manifest" href="{% static 'js/manifest.json' %}">
+<!-- ios support -->
+<link rel="apple-touch-icon" href="/Images/icons/icon-96x96.png">
+<meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+<!-------Header---------->
+<div class="header">
+        <img src="{% static 'Images/logo.png' %}" alt="logo" />
+        <div class="topnav" id="myTopnav">
+          <a href="https://medrecgp.herokuapp.com" >Home</a>
+          <a href="#About-Us">About Us</a>
+          <a href="https://medrecgp.herokuapp.com">Contact Us</a>
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+</div>
+{%endblock%}

@@ -1,0 +1,93 @@
+{% load bootstrap4%}
+{% bootstrap_messages %}
+{% load crispy_forms_tags %}
+{%block profile%}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title> 
+    <link rel="stylesheet" type= "text/css" href="bootstrap-4.5.3-dist/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="{% static 'css/prediction.css' %}">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+    {% include 'Pages/header.html'%}
+    <body>
+        <div class="container">
+            <div class= "main">   
+                <div class= "row">
+                    <div class="col-md-4 mt-1">
+                        <div class="card text-center sidebar">
+                            <div class = "card">
+                                <img src= "{% static 'css/Images/logoo.png' %}" >
+                                  <div class="mt-3"> 
+                                   <h3> </h3>
+                                   <a href="{% url 'home' %}">Home</a>
+                                   <a href="{% url 'myrecords' %}">My Records</a>
+                                   <a href="{% url 'profile' %}">back profile</a>
+                                   <a href="{% url 'home' %}">Signout</a>
+                               </div>
+                            </div>    
+                        </div>    
+                    </div> 
+                    <div class="col-md-8 mt-1">
+                        <div class="card mb-3 content">
+                            <h1 class="m-3 pt-3">Check is Based on your last entered values</h1>
+                            <form method="POST">{% csrf_token %}
+                                <button class="button1" type="submit"> Show Result </button>
+                                <h1 class="m-3 pt-3">{{result}}</h1>
+                               <p id="demo"></p>
+                            </form>                
+                        </div>
+                        
+                    </div>      
+                        
+                    </div>   
+                </div>    
+            </div>    
+        </div>
+        <div id="sideNav">                
+            <nav>
+              <ul>
+                <li><a href="#regform" >Login Form</a></li>
+                <li><a href="#footer" >Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!--the button layout -->
+          <div id="menuButton">            
+               <img src="{% static 'Images/menu.png' %}" id="menu">
+          </div>
+
+        
+
+        <!--the following is our scripts -->
+    <script>           
+        var menuButton= document.getElementById("menuButton")
+        var sideNav= document.getElementById("sideNav")
+        var menu = document.getElementById("menu")
+  
+        sideNav.style.right=="-250px";
+  
+        menuButton.onclick = function(){ 
+             if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+             menu.src="{% static 'Images/menu_inverse.png' %}"
+            }
+             else{ sideNav.style.right="-250px";
+             menu.src="{% static 'Images/menu.png' %}"
+                 } 
+        }  
+         var scroll = new SmoothScroll('a[href*="#"]', {
+             speed: 1000,
+             speedAsDuration: true
+    });
+      </script>
+     </body>
+</html>
+
+{%endblock profile%}
+
+
+{% include 'Pages/footer.html'%}

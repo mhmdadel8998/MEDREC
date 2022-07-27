@@ -1,0 +1,147 @@
+
+{% block home %}
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  
+  <head>
+    <title>MEREC Website</title>
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width = device-width, intial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+  </head>
+  {% include 'Pages/header.html'%}
+  <body>
+
+    <!-- here we made a banner to put our background in -->
+  <section id="Banner">  
+
+    <!--here we have the logo -->
+    <!-- <img src="Images/logo.png" class="logo">  -->
+    <div class="banner-text">
+      <h1><b> MEDREC</b></h1> <!--the main head for the web page-->
+      <p><b>  نحن نهتم بصحتك </b></p>
+      <div class="banner-button">
+        <a href="{% url 'login' %}"><span> </span>Doctor</a>              <!--put the buttons -->
+        <a href="{% url 'phome' %}"><span> </span> Patient </a>
+      </div>
+    </div>
+
+
+
+      <!-- <div class="name" >
+        <form>
+          <button class="button1" type="submit" formaction="login.html"><b>Medical Record</b></button>
+          <button class="button2" type="submit" formaction="login.html"><b>Diabetes Prediction</b></button>
+          <button class="button3" type="submit" formaction="login.html"><b>Connecting Devices</b></button>
+          <button class="button4" type="submit" formaction="login.html"><b>Medication Error</b></button>
+        </form>
+      </div> -->
+  
+  </section> 
+
+  <!--here we made our navigation sections -->
+  
+  <div id="sideNav">                
+    <nav>
+      <ul>
+        <li><a href="#Banner" >Home</a></li>
+        <li><a href="#About-Us" >About Us</a></li>
+        <li><a href="#Contact-Us" >Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <!--the button layout -->
+  <div id="menuButton">            
+    <img src="{% static 'Images/menu.png' %}" id="menu">
+  </div>
+
+
+
+  <!--the following is the second section of the page -->
+  <section id="About-Us">
+    <div class="title-text">
+      <p>About Us</p>
+      <h1>What we do?</h1>
+    </div>
+    <div class="featureBox">
+      <div class="features">
+        <h1> Medical Records</h1>
+        <div class="features-desc">
+          <div class="feature-icon"></div>
+          <div class="features-text">
+            <p> MEDREC is a graduation project for SBME students, that works on the patient medical records from the 2 different prospective Hospitals, which is the normal, and the Patient view so it can integrate them to make an organized Health care record for each individual in the system and based on the data collected it can predict and detect the symptoms of several diseases, and alert both the healthcare provider and the patient of the procedures need to prevent this disease as early as possible. </p>
+          </div>
+        </div>
+      </div>
+      <div class="features-img">
+        <video width="390" height="390" controls>
+          <source src="{% static 'Images/Miracle season.mp4' %} " type="video/mp4">
+          <!-- <img src="Images/Hospital cartoon.jpg"> -->
+        </video>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+  <!--the following is the third section of the page -->
+  <!-- <section id="Contact-Us">
+    <div class="title-text">
+      <p>Contact Us</p>
+      <h1>How to reach our services?</h1>
+      <div class="social">
+        <a href="https://www.facebook.com/jo.elhely"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/in/yousof-mahmoud-el-hely-891973169/"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div> -->
+
+
+    <!-- <div class="Social-Links">
+      <i class="fa fa-facebook"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-github"></i>
+    </div>
+  -->
+
+  
+  </section>
+
+  <!--the following is our scripts -->
+  <script>           
+    var menuButton= document.getElementById("menuButton")
+    var sideNav= document.getElementById("sideNav")
+    var menu = document.getElementById("menu")
+
+    sideNav.style.right=="-250px";
+
+    menuButton.onclick = function(){ 
+         if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+         menu.src="{% static 'Images/menu_inverse.png' %}"
+        }
+         else{ sideNav.style.right="-250px";
+         menu.src="{% static 'Images/menu.png' %}"
+             } 
+    }  
+     var scroll = new SmoothScroll('a[href*="#"]', {
+         speed: 1000,
+         speedAsDuration: true
+});
+  </script>
+
+ 
+  </body>
+</html>
+{% include 'Pages/footer.html' %}
+{% endblock home%}
+

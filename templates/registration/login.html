@@ -1,0 +1,109 @@
+
+{% load static %}
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}{% block content %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login page</title> 
+        <link rel="stylesheet" href="{% static 'css/login.css'%}"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    </head>
+    <body>
+      {% include 'Pages/header.html'%}
+
+        </div>
+        <div class="regform" id="regform">
+            <h1>Login</h1>
+        </div>
+
+
+<div class="main">
+  <form method="POST">{% csrf_token %}
+    {% for field in form %}
+    <div class="row">    
+    <h4>{{ field.label_tag }}</h4>
+    {% if field.help_text %}
+          <sup>{{ field.help_text }}</sup>
+    {% endif %} 
+    {{ field.errors }}
+    <div class="col-md-6 pull-left">
+    {{ field }}
+  </div>
+</div>
+{% endfor %}
+      {% bootstrap_button "Login" button_type="submit"  value="login"%}
+   
+    </div>
+  </form>
+
+
+        {% comment %} {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %} {% endcomment %}
+
+
+    {% comment %} {%bootstrap_form form size='large' show_label=False form_group_class='w3-input w3-border-0 w3-large' layout='inline'%}
+    {% if form.errors %}
+      {% for field in form %}
+         {% for error in field.errors %}
+          {{ error|escape}}
+         {% endfor %}
+      {% endfor %}
+    {% endif %} {% endcomment %}
+  
+
+  {# Assumes you setup the password_reset view in your URLconf #}
+  {% comment %} <p><a href="{% url 'password_reset' %}">Lost password?</a></p> {% endcomment %}
+ </div>
+  <div id="sideNav">                
+    <nav>
+      <ul>
+        <li><a href="#regform" >Login Form</a></li>
+        <li><a href="#footer" >Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!--the button layout -->
+  <div id="menuButton">            
+       <img src="{% static 'Images/menu.png'%}" id="menu">
+  </div>
+
+  {% include 'Pages/footer.html' %}
+
+
+<!--the following is our scripts -->
+<script>           
+var menuButton= document.getElementById("menuButton")
+var sideNav= document.getElementById("sideNav")
+var menu = document.getElementById("menu")
+
+sideNav.style.right=="-250px";
+
+menuButton.onclick = function(){ 
+     if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+     menu.src="{% static 'Images/menu_inverse.png'%}"
+    }
+     else{ sideNav.style.right="-250px";
+     menu.src="{% static 'Images/menu.png' %}"
+         } 
+}  
+ var scroll = new SmoothScroll('a[href*="#"]', {
+     speed: 1000,
+     speedAsDuration: true
+});
+</script>
+</body>
+</html>
+
+{% endblock %}

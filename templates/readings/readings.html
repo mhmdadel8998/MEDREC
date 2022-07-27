@@ -1,0 +1,78 @@
+{% block script%}
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var xValues = [{%for BP in BP%} '{{BP.time}}', {%endfor%}];
+      { }
+
+    new Chart("myChart", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          data: [{%for BP in BP%} {{BP.value}}, {%endfor%}],
+          label: "Blood Pressure",
+          borderColor: "red",
+          fill: false
+        }
+        ]
+      },
+      options : {
+        hAxis: {title: 'Date'},
+        vAxis: {title: 'Blood Pressure'},
+        legend: 'none'
+      }
+    });
+</script>
+<script>
+    var xValues = [{%for glucose in glucose%} '{{glucose.time}}', {%endfor%}];
+        { }
+
+    new Chart("myChart1", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          data: [{%for glucose in glucose%} {{glucose.value}}, {%endfor%}],
+          borderColor: "green",
+          label: "Glucose Level",
+          fill: false
+        }
+        ]
+      },
+      options : {
+        hAxis: {title: 'Date'},
+        vAxis: {title: 'Glucose Level'},
+        legend: 'none'
+      }
+    });
+</script>
+
+<script>
+    var xValues = [{%for ins in ins%} '{{ins.time}}', {%endfor%}];
+      {   }
+    new Chart("myChart2", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          data: [{%for ins in ins%} {{ins.value}}, {%endfor%}],
+          borderColor: "blue",
+          label: "Insulin level",
+          fill: false
+        }
+        ]
+      },
+      options : {
+        hAxis: {title: 'Days'},
+        vAxis: {title: 'Insulin'},
+        legend: 'none'
+      }
+    });
+</script> 
+{%endblock%}
+

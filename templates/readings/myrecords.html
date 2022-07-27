@@ -1,0 +1,143 @@
+{% load bootstrap4%}
+
+{%block myrecords%}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title> 
+        <link rel="stylesheet" type= "text/css" href="bootstrap-4.5.3-dist/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="{% static 'css/myrecord.css' %}">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="manifest" href="{% static 'js/manifest.json' %}">
+        <!-- ios support -->
+      <link rel="apple-touch-icon" href="{% static 'Images/icons/icon-96x96.png' %}">
+      <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+    </head>
+    <body>
+{% include 'Pages/header.html'%}
+        <div class="container">
+            <div class= "main">   
+                <div class= "row">
+                    <div class="col-md-4 mt-1">
+                        <div class="card text-center sidebar">
+                            <div class = "card">
+                               <img src= "{% static 'css/Images/logoo.png' %}" >
+                               <div class="mt-3">
+                                   <h3>{{profile.user.first_name}}</h3>
+                                   <a href="{% url 'profile' %}">Profile</a>
+                                   <a href="{% url 'home' %}">Signout</a>
+                               </div>
+                            </div>    
+                        </div>    
+                    </div> 
+                    <div class="col-md-8 mt-1">
+                        <div class="card mb-3 content">
+                            <h1 class="m-3 pt-3">My Records</h1>
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        
+                                    </tr>
+                                </thead>
+
+                                
+                                
+
+
+                                <tbody>
+                                    {% comment %} <tr>
+                                        <td><p> BloodPressure  <p></td>          
+                                        {% for bloodp in bloodp|slice:"5"%}                          
+                                        <td><p> {{bloodp.value}}</p></td>
+                                        {% endfor %}
+                                    </tr> {% endcomment %}
+                                    {% comment %} <tr>
+                                        <td><p> Time  <p></td>          
+                                        {% for bloodp in bloodp|slice:"5"%}                          
+                                        <td><p> {{bloodp.date|date:"d m"}} {{bloodp.date|time:"H:i" }}</p></td>
+                                        {% endfor %}
+                                    </tr> {% endcomment %}
+                                    {% comment %} <tr> 
+                                        <td><p> Gluecose  <p></td>          
+                                        {% for gluecose in gluecose|slice:"5" %}                 
+                                        <td><p> {{gluecose.value}}</p></td>
+                                        {% endfor %}
+                                    </tr> {% endcomment %}
+                                    {% comment %} <tr>
+                                        <td><p> Time  <p></td>
+                                        {% for gluecose in gluecose|slice:"5"%}                          
+                                        <td><p> {{gluecose.date|date:"d m"}} {{gluecose.date|time:"H:i" }}</p></td>
+                                        {% endfor %}
+                                    </tr> {% endcomment %}
+                                    {% comment %} <tr>
+                                        <td><p> BMI Level  <p></td>          
+                                        {% for bmi in bmi|slice:"5"%}                          
+                                        <td><p> {{bmi.value}}</p></td>
+                                        {% endfor %} {% endcomment %}
+                                    {% comment %} </tr><tr>
+                                        <td><p> Time  <p></td>
+                                            {% for bmi in bmi|slice:"5"%}                          
+                                            <td><p> {{bmi.date|date:"d m"}} {{bmi.date|time:"H:i" }}</p></td>
+                                            {% endfor %}
+                                    </tr> {% endcomment %}
+                                </tbody>
+                            </table>
+                            <form>
+                                <!-- <input type="file" id="myfile" name="myfile"> -->
+                                <button class="button2" type="submit" formaction="{% url 'editrecord' %}"><b>Add New</b></button>
+                            </form>
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>                       
+        <div id="sideNav">                
+            <nav>
+              <ul>
+                <li><a href="#regform" >Login Form</a></li>
+                <li><a href="#footer" >Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!--the button layout -->
+          <div id="menuButton">            
+               <img src="/Images/menu.png" id="menu">
+          </div>
+
+          
+        {% include 'Pages/footer.html' %}
+
+        <!--the following is our scripts -->
+    <script>           
+        var menuButton= document.getElementById("menuButton")
+        var sideNav= document.getElementById("sideNav")
+        var menu = document.getElementById("menu")
+  
+        sideNav.style.right=="-250px";
+  
+        menuButton.onclick = function(){ 
+             if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+             menu.src="/Images/menu_inverse.png"
+            }
+             else{ sideNav.style.right="-250px";
+             menu.src="/Images/menu.png"
+                 } 
+        }  
+         var scroll = new SmoothScroll('a[href*="#"]', {
+             speed: 1000,
+             speedAsDuration: true
+    });
+      </script>
+     </body>
+</html>
+{% endblock %}
