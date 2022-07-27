@@ -1,0 +1,337 @@
+body {
+  background-color: white;
+}
+
+.main {
+
+  margin: auto;
+  padding: 15px;
+  font-family: Arial, Helvetica, sans-serif0;
+}
+.container {
+  margin: auto;
+  position: relative;
+}
+
+.sidebar {
+  float: left;
+  padding: 100px;
+  background-color: rgba(31, 139, 130, 0.7);
+  color: white;
+  height: 100%;
+}
+
+.sidebar a {
+  /* margin-left: 10px; */
+  display: flex;
+  color: white;
+  padding-bottom: 10px;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+}
+
+/* #more {
+  display: none;
+} */
+
+.content {
+  position: relative;
+  padding: 100px;
+  background-color: whitesmoke;
+  justify-items: center;
+  align-items: center;
+  height: 900px;
+}
+form{
+    display: content;
+    align-items: center;
+    justify-content:cener;
+    padding: 10px;
+    align-items:center;
+}
+
+ /* {% comment %} #myFile {
+  padding: 20px;
+  margin-left: 10px;
+} {% endcomment %} */
+
+/* {% comment %} #file-input::-webkit-file-upload-button {
+  visibility: hidden;
+  user-select: none;
+}  {% endcomment %} */
+/* {% comment %} #file-input {
+  display: none;
+  user-select: none;
+} {% endcomment %} */
+
+ /* #submit {
+  background-color: rgba(31, 139, 130, 0.7);
+  border-radius: 5px;
+}  */
+
+.image::-webkit-file-upload-button {
+  visibility: hidden;
+  display: hidden;
+}
+.image::before {
+  content: "Select file";
+  position: relative;
+  display: inline-block;
+  color: white;
+  background-color: rgba(31, 139, 130, 0.7);
+  border: 2px solid #366473;
+  border-radius: 12px;
+  padding: 15px 15px;
+  /* outline: none; */
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  /* text-shadow: 1px 1px black; */
+  font-weight: 700;
+  font-size: 13pt;
+}
+.image:hover::before {
+  border-color: black;
+  display: hidden;
+}
+.image:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  display: hidden;
+}
+
+.button2
+{
+    position: relative;
+    background-color: rgba(31, 139, 130, 0.7);
+    display: block;
+    text-align: center;
+    border-radius: 12px;
+    border: 2px solid #366473;
+    padding: 15px 15px;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.25px;
+    font-size: 20px;
+    margin-left:110px;
+}
+
+
+.header {
+  padding: 10px;
+
+  /* background: rgba(31, 139, 130, 0.7); */
+  background-color: white;
+}
+
+.header img {
+  float: left;
+  width: 100px;
+  height: 30px;
+  position: relative;
+  top: 2%;
+}
+
+.m-3 {
+  text-align: center;
+}
+.row p {
+  text-align: center;
+  font-weight: bolder;
+  font-size: large;
+}
+/* .input-group {
+     margin-left: 300px;
+      
+  } */
+
+/* Add a black background color to the top navigation */
+.header.topnav {
+  /* background-color: rgba(17, 75, 70, 0.7); */
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  /* float: left; */
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+  color: black;
+  text-align: center;
+  margin-left: 250px;
+  padding: 0.0001px 5px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px) {
+  .topnav a,
+  .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+#sideNav {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  right: -250px;
+  top: 0;
+  background: #009688;
+  z-index: 2;
+  transition: 0.5s;
+}
+nav ul li {
+  list-style: none;
+  margin: 50px 20px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/*here we have the layout of the menu button and its transations */
+#menuButton {
+  width: 50px;
+  height: 50px;
+  background: #009688;
+  text-align: center;
+  position: fixed;
+  right: 30px;
+  top: 20px;
+  border-radius: 3px;
+  z-index: 3;
+  cursor: pointer;
+}
+#menuButton img {
+  width: 50px;
+  margin-top: 0px;
+}
+
+/*here we have the media */
+@media screen and (max-width: 770px) {
+  .banner-text h1 {
+    font-size: 44 px;
+  }
+  .banner-button a {
+    display: block;
+    margin: 20px auto;
+  }
+  form {
+    flex-basis: 100%;
+    margin: 20px auto;
+  }
+
+  .button1 {
+    font-size: 25px;
+    flex-basis: 100%;
+  }
+  .button2 {
+    font-size: 25px;
+    flex-basis: 100%;
+  }
+  .button3 {
+    font-size: 25px;
+    flex-basis: 100%;
+  }
+  .button4 {
+    font-size: 25px;
+    flex-basis: 100%;
+  }
+}
+/* #Contact-Us{
+    width: 100%;
+    padding: auto ;
+    background: #efefef;
+    display: flex ;
+} */
+
+footer {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  bottom: 0px;
+  /* background: rgb(141, 141, 141); */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+footer p:nth-child(1) {
+  font-size: 30px;
+  color: black;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+footer p:nth-child(2) {
+  color: black;
+  font-size: 30px;
+  width: 500px;
+  margin-bottom: 30px;
+  text-align: center;
+  line-height: 26px;
+}
+
+.social {
+  display: flex;
+  height: 100vh;
+}
+.social a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  border-radius: 50%;
+  margin: 22px 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 60px;
+  padding: 15px 15px;
+}
+.social a:hover {
+  transform: scale(1.3);
+  transition: 0.3s;
+}

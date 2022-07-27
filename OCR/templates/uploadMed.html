@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile</title> 
+        <link rel="stylesheet" type= "text/css" href="bootstrap-4.5.3-dist/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="/static/Css/upload.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="manifest" href="manifest.json">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <!-- ios support -->
+      <link rel="apple-touch-icon" href="/Images/icons/icon-96x96.png">
+      <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+    </head>
+    <body>
+        <div class="header">
+            <img src="logo.png" alt="logo" />
+            <div class="topnav" id="myTopnav">
+              <a href="index.html" >Home</a>
+              <a href="index.html">About Us</a>
+              <a href="#footer">Contact Us</a>
+              <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+        <div class="container">
+            <div class= "main">   
+                <div class= "row">
+                    <div class="col-md-4 mt-1">
+                        <div class="card text-center sidebar">
+                            <div class = "card">
+                               <img src= "profile.png" width = "100%" height="100%" />
+                               <div class="mt-3">
+                                   <h3>Miran Mahmoud</h3>
+                                   <a href="index2.html">Home</a>
+                                   <a href="medicalrecords.html">My Records</a>
+                                   <a href="patient.html">Edit Data</a>
+                                   <a href="prediction.html">Diet advise</a>
+                                   <a href="chart.html">Statistics Details</a>
+                                   <a href="login.html">Signout</a>
+                               </div>
+                            </div>    
+                        </div>    
+                    </div> 
+                    <div class="col-md-8 mt-1">
+                        <div class="card mb-3 content">
+                            <h3>Please upload an image</h3>
+                            <form method=post enctype=multipart/form-data>
+                                <input type=file class="image" id="myfile" name=file>
+                                <br><br>
+                                <input class="button2"id="submit" type="submit" value="Upload">
+                            </form>
+                            {% if img_src %}
+                              <img src= "{{ url_for ('static',filename=img_src)  }}" style="width:300px;height:auto;" />
+                            {% endif %}
+
+                            <br><br>
+                            
+                           {% if extracted_text %}
+                           <p> The extracted text from the image above is: <b> {{ extracted_text }} </b></p>
+                             <br>
+                             {% else %}
+                              The extracted text will be displayed here
+                             {% endif %}
+                        </div>
+                        
+                    </div>   
+                </div>    
+            </div>    
+        </div>
+        <div id="sideNav">                
+            <nav>
+              <ul>
+                <li><a href="#regform" >Login Form</a></li>
+                <li><a href="#footer" >Contact Us</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!--the button layout -->
+          <div id="menuButton">            
+               <img src="menu.png" id="menu" />
+          </div>
+
+          
+        <footer id ="footer">
+            <p>Contact Us</p>
+            <p><b>How to reach our services?</b></p>
+            <div class="social">
+              <a href="https://www.facebook.com/profile.php?id=100005210747809"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.linkedin.com/in/miran-mahmoud-616a42217/"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </footer>
+
+     </body>
+     
+        <!--the following is our scripts -->
+        <script>           
+            var menuButton= document.getElementById("menuButton")
+            var sideNav= document.getElementById("sideNav")
+            var menu = document.getElementById("menu")
+      
+            sideNav.style.right=="-250px";
+      
+            menuButton.onclick = function(){ 
+                 if(sideNav.style.right=="-250px"){sideNav.style.right="0";
+                 menu.src="/Images/menu_inverse.png"
+                }
+                 else{ sideNav.style.right="-250px";
+                 menu.src="/Images/menu.png"
+                     } 
+            }  
+             var scroll = new SmoothScroll('a[href*="#"]', {
+                 speed: 1000,
+                 speedAsDuration: true
+        });
+        </script>
+
+        <script>
+        function myFunctionn() {
+          var dots = document.getElementById("dots");
+          var moreText = document.getElementById("more");
+          var btnText = document.getElementById("myBtn");
+        
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+          }
+        }
+      </script>
+
+
+</html>
